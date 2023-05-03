@@ -14,8 +14,10 @@ usage =
   do
     progName <- getProgName
     putStrLn $ unwords ["usage:", progName, "<input1>","<input2>","<bar-width>", "<output>"]
+    putStrLn "Mergese two images column by column"
+    putStrLn "Options:"
     putStrLn "\tinput1, input2: Input images with matching dimensions"
-    putStrLn "\tbar-width: Width of the segments taken from each input image"
+    putStrLn "\tcolumn-width: Width of the columns in pixels taken from each input image"
     putStrLn "\toutput: Newly generated image with twice the input images' size"
     
 main :: IO ()
