@@ -30,10 +30,10 @@ main =
         exitFailure
       )
     else
-     interweave (args !! 0) (args !! 1) (read $ args !! 2) (args !! 3)
+     interweave (args !! 0) (args !! 1) (read $ args !! 2) 80 (args !! 3)
 
-interweave :: String -> String -> Int -> String -> IO ()
-interweave in1 in2 segmentWidth out =
+interweave :: String -> String -> Int -> Int -> String -> IO ()
+interweave in1 in2 segmentWidth quality out =
   do
     input1 <- readImageWithMetadata in1
     input2 <- readImageWithMetadata in2
@@ -52,7 +52,7 @@ interweave in1 in2 segmentWidth out =
         if x1 /= x2 || y1 /= y2 then
           die $ "Input dimensions don't match: x1=" ++ show x1 ++ " x2=" ++ show x2 ++ " y1=" ++ show y1 ++ " y2=" ++ show y2
         else
-          saveJpgImage 100 out $ ImageRGB16 $ generateImage (\x y -> let (img,pos) = lookupMap !! x in pixelAt (lookups !! (img -1)) (pos-1) y)
+          saveJpgImage quality out $ ImageRGB16 $ generateImage (\x y -> let (img,pos) = lookupMap !! x in pixelAt (lookups !! (img -1)) (pos-1) y)
           (x1 * 2) y1
 
 createLookupMap :: Int -> Int -> Int -> [(Int,Int)]
